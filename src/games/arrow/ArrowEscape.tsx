@@ -231,8 +231,8 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       </section>
 
       <section className="arrow-board-wrap">
-        <span className="arena-gem gem-left">◆</span>
-        <span className="arena-gem gem-right">◆</span>
+        <img className="arena-gem gem-left" src="/art/resource-gem.svg" alt="" />
+        <img className="arena-gem gem-right" src="/art/resource-gem.svg" alt="" />
         <div className="board-banner"><span><i>⚔</i> Clear every arrow</span><b>Tap only when the path is open</b></div>
         <div className="arrow-board-stage">
           <div
@@ -255,13 +255,13 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       </section>
 
       <section className="arrow-tools">
-        <button onClick={showHint}><span>💡</span><div><b>Hint</b><small>Find a safe arrow</small></div></button>
-        <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><span className="combo-crown">♛</span><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
-        <button onClick={() => resetLevel()}><span>↻</span><div><b>Restart</b><small>Try a new route</small></div></button>
+        <button onClick={showHint}><span className="tool-orb hint-orb">?</span><div><b>Hint</b><small>Find a safe arrow</small></div></button>
+        <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><span className="combo-crown">★</span><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
+        <button onClick={() => resetLevel()}><span className="tool-orb restart-orb">↻</span><div><b>Restart</b><small>Try a new route</small></div></button>
       </section>
 
       <section className="arrow-treasure">
-        <div className={`mini-chest ${chestReady ? 'ready' : ''}`}><span>✦</span></div>
+        <img className={`mini-chest-art ${chestReady ? 'ready' : ''}`} src="/art/treasure-chest.svg" alt="" />
         <div className="treasure-copy">
           <div><b>{chestReady ? 'Treasure ready!' : 'Treasure trail'}</b><small>{chestReady ? 'Clear this level to finish the set' : `${5 - chestStep} levels until the next chest`}</small></div>
           <div className="treasure-track"><span style={{ width: `${(chestStep / 5) * 100}%` }} /></div>
@@ -274,7 +274,8 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
         <div className="camp-rock rock-two" />
         <div className="camp-flag flag-one">⚡</div>
         <div className="camp-flag flag-two">★</div>
-        <img src="/art/treasure-chest.svg" alt="" />
+        <img className="camp-chest-art" src="/art/treasure-chest.svg" alt="" />
+        <img className="camp-mascot" src="/art/zapling-hero.svg" alt="" />
         <div className="camp-copy">
           <small>VICTORY CAMP</small>
           <b>{chestReady ? 'Golden chest unlocked!' : 'Keep clearing the arena'}</b>
