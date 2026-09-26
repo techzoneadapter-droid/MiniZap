@@ -78,6 +78,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
     setFeedback(null)
     setBonusClaimed(false)
     setLevelIntro(true)
+    window.setTimeout(() => setLevelIntro(false), 720)
     playSfx('level')
   }
 
@@ -264,7 +265,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       {phase !== 'playing' && (
         <div className="arrow-overlay">
           <div className="confetti" aria-hidden="true">
-            {phase === 'won' && Array.from({ length: 12 }, (_, index) => <i key={index} style={{ '--i': index } as CSSProperties}/>)}
+            {phase === 'won' && Array.from({ length: 12 }, (_, index) => <i key={index} style={{ '--i': index, '--left': `${4 + index * 7.6}%` } as CSSProperties}/>)}
           </div>
           <div className={`arrow-modal ${phase}`}>
             <div className="modal-emblem">{phase === 'won' ? '♛' : '☠'}</div>
