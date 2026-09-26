@@ -6,6 +6,7 @@ import { GamesScreen } from './screens/GamesScreen'
 import { RewardsScreen } from './screens/RewardsScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
 import { GameDetailScreen } from './screens/GameDetailScreen'
+import { ArrowEscape } from './games/arrow/ArrowEscape'
 import type { MiniGame } from './types/game'
 
 export default function App() {
@@ -14,13 +15,41 @@ export default function App() {
   const [coins, setCoins] = useState(8240)
   const [toast, setToast] = useState('')
 
-  const completeDemo = () => {
-    setCoins(v => v + 120)
-    setToast('+120 coins · Demo complete!')
-    setTimeout(() => setToast(''), 1800)
+  const showToast = (message: string) => {
+    setToast(message)
+    window.setTimeout(() => setToast(''), 1800)
   }
 
-  if (selectedGame) return <><GameDetailScreen game={selectedGame} onBack={() => setSelectedGame(null)} onComplete={completeDemo}/>{toast && <div className="toast">{toast}</div>}</>
+  const awardCoins = (amount: number, message = `+${amount} coins`) => {
+    setCoins((value) => value + amount)
+    showToast(message)
+  }
+
+  const completeDemo = () => {
+    awardCoins(120, '+120 coins · Demo complete!')
+  }
+
+  if (selectedGame?.id === 'arrow') {
+    return (
+      <>
+        <ArrowEscape onBack={() => setSelectedGame(null)} onEarnCoins={awardCoins} />
+        {toast && <div className="toast">{toast}</div>}
+      </>
+    )
+  }
+
+  if (selectedGame) {
+    return (
+      <>
+        <GameDetailScreen
+          game={selectedGame}
+          onBack={() => setSelectedGame(null)}
+          onComplete={completeDemo}
+        />
+        {toast && <div className="toast">{toast}</div>}
+      </>
+    )
+  }
 
   return (
     <div className="app-shell">
