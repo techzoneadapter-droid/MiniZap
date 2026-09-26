@@ -1,75 +1,89 @@
 import { games } from '../data/games'
 import type { MiniGame } from '../types/game'
-import { GameCard } from '../components/GameCard'
 import { SectionTitle } from '../components/SectionTitle'
 
 export function HomeScreen({ onPlay }: { onPlay: (game: MiniGame) => void }) {
-  const featured = games[0]
+  const arrow = games[0]
+  const tapAway = games[1]
+  const parking = games[2]
+  const colorSort = games[3]
 
   return (
-    <main className="screen home-screen">
-      <section className="hero-panel">
-        <div className="hero-sun" />
-        <div className="hero-cloud cloud-1" />
-        <div className="hero-cloud cloud-2" />
-        <div className="hero-mountain mountain-a" />
-        <div className="hero-mountain mountain-b" />
-        <div className="hero-grass grass-a" />
-        <div className="hero-grass grass-b" />
+    <main className="screen home-screen world-home">
+      <section className="kingdom-hub">
+        <div className="kingdom-heading">
+          <span>⚔ MINI ZAP KINGDOM</span>
+          <h1>Choose your arena</h1>
+        </div>
 
-        <div className="hero-copy">
-          <span className="eyebrow-chip">⚔ DAILY QUEST</span>
-          <h1>Small games.<br/><em>Big streaks.</em></h1>
-          <p>Beat today's challenge and grab the golden chest before the timer ends.</p>
-          <button className="primary-cta hero-play" onClick={() => onPlay(featured)}>
-            <span className="button-shine" />
-            PLAY NOW <span>▶</span>
+        <img className="kingdom-art" src="/art/village-hub.svg" alt="" />
+
+        <button className="world-node node-left" onClick={() => onPlay(arrow)}>
+          <span className="node-icon">➹</span>
+          <div><small>ARENA 01</small><b>Arrow Escape</b></div>
+        </button>
+
+        <button className="world-node node-center" onClick={() => onPlay(games[4])}>
+          <span className="node-icon">♛</span>
+          <div><small>DAILY QUEST</small><b>Lightning Trial</b></div>
+        </button>
+
+        <button className="world-node node-right" onClick={() => onPlay(tapAway)}>
+          <span className="node-icon">✦</span>
+          <div><small>ARENA 02</small><b>Tap Away</b></div>
+        </button>
+
+        <div className="map-badge">
+          <span>🔥</span>
+          <div><small>STREAK</small><b>7 DAYS</b></div>
+        </div>
+      </section>
+
+      <section className="kingdom-status">
+        <button className="league-panel">
+          <img src="/art/league-shield.svg" alt="" />
+          <div><small>WEEKLY LEAGUE</small><strong>Gold Arena</strong><span>Top 18% · 1,240 pts</span></div>
+          <b className="panel-chevron">›</b>
+        </button>
+
+        <button className="chest-panel">
+          <img src="/art/treasure-chest.svg" alt="" />
+          <div><small>NEXT TREASURE</small><strong>2 wins left</strong><span>Rare chest waiting</span></div>
+          <b className="panel-chevron">›</b>
+        </button>
+      </section>
+
+      <SectionTitle eyebrow="QUICK PLAY" title="Battle grounds" action="All games" />
+
+      <section className="battle-grid">
+        {[arrow, tapAway, parking, colorSort].map((game, index) => (
+          <button
+            className={`battle-tile tile-${index + 1}`}
+            key={game.id}
+            onClick={() => onPlay(game)}
+          >
+            <span className="tile-glow" />
+            <span className="tile-rank">{index + 1}</span>
+            <div className="tile-icon">{game.icon}</div>
+            <div className="tile-copy">
+              <small>{game.difficulty.toUpperCase()}</small>
+              <b>{game.name}</b>
+              <span>{game.levels} levels</span>
+            </div>
+            <span className="tile-play">▶</span>
           </button>
-        </div>
-
-        <div className="hero-tower">
-          <div className="tower-aura" />
-          <div className="flag">⚡</div>
-          <div className="roof" />
-          <div className="tower-window" />
-          <div className="tower-base" />
-          <div className="tower-rock rock-a" />
-          <div className="tower-rock rock-b" />
-        </div>
-
-        <div className="hero-ribbon">
-          <span>★ FEATURED</span>
-          <b>Arrow Escape</b>
-        </div>
+        ))}
       </section>
 
-      <section className="streak-strip">
-        <div className="streak-icon">🔥</div>
-        <div><small>DAILY STREAK</small><strong>7 days</strong></div>
-        <div className="streak-days">{['M','T','W','T','F','S','S'].map((d,i)=><span key={`${d}-${i}`} className={i<6?'done':i===6?'today':''}>{i<6?'✓':d}</span>)}</div>
+      <section className="quest-banner" onClick={() => onPlay(games[4])}>
+        <div className="quest-emblem">⚡</div>
+        <div>
+          <small>LIMITED DAILY TRIAL</small>
+          <strong>Beat 850 points in 45 sec</strong>
+          <span>Reward: 350 coins + treasure progress</span>
+        </div>
+        <button>PLAY</button>
       </section>
-
-      <section className="home-event-row">
-        <button className="event-card purple">
-          <span className="event-icon">♛</span>
-          <div><small>WEEKLY LEAGUE</small><b>Gold Arena</b><em>Top 18%</em></div>
-        </button>
-        <button className="event-card gold">
-          <span className="event-icon">✦</span>
-          <div><small>NEXT CHEST</small><b>2 wins left</b><em>Rare reward</em></div>
-        </button>
-      </section>
-
-      <SectionTitle eyebrow="QUICK PLAY" title="Pick your challenge" action="See all" />
-      <div className="game-list">{games.slice(0,4).map(game => <GameCard key={game.id} game={game} onPlay={onPlay} />)}</div>
-
-      <SectionTitle eyebrow="TODAY" title="Daily Challenge" />
-      <button className="daily-card" onClick={() => onPlay(games[4])}>
-        <div className="daily-glow" />
-        <div className="daily-crown">♛</div>
-        <div><strong>Lightning Reflex</strong><span>Reach 850 points in 45 seconds</span><div className="reward-line"><b>+350</b> coins <b>+1</b> chest</div></div>
-        <div className="daily-arrow">›</div>
-      </button>
     </main>
   )
 }
