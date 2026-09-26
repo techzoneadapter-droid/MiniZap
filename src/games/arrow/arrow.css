@@ -388,3 +388,83 @@
   .arena-camp img{width:88px;height:74px}
   .camp-copy{left:98px;top:14px}
 }
+
+
+/* ==========================================================================
+   ASSET-FIRST ARROW ARENA PASS
+   ========================================================================== */
+.arena-gem{
+  width:34px!important;height:34px!important;padding:0!important;background:none!important;border:0!important;
+  box-shadow:none!important;clip-path:none!important;object-fit:contain;
+  filter:drop-shadow(0 4px 0 #24446c) drop-shadow(0 0 10px rgba(91,224,255,.55))
+}
+.gem-left{left:22px}.gem-right{right:22px}
+
+.arrow-board-wrap:after{
+  content:"";position:absolute;z-index:-1;inset:-12px;border-radius:35px;
+  background:conic-gradient(from 0deg,rgba(255,231,98,.08),rgba(116,240,255,.22),rgba(163,102,255,.18),rgba(255,231,98,.08));
+  filter:blur(5px);animation:arena-ring 5.5s linear infinite
+}
+@keyframes arena-ring{to{transform:rotate(360deg)}}
+.arrow-board-stage:after{
+  content:"";position:absolute;z-index:6;top:-20%;left:-55%;width:42%;height:145%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);
+  transform:skewX(-18deg);pointer-events:none;animation:board-sweep 4.4s ease-in-out infinite
+}
+@keyframes board-sweep{0%,55%{left:-55%}82%,100%{left:125%}}
+
+.arrow-piece{
+  overflow:hidden;
+  box-shadow:
+    inset 0 4px rgba(255,255,255,.5),
+    inset 0 -6px rgba(34,18,48,.14),
+    0 6px 0 hsla(var(--piece-hue),50%,24%,.95),
+    0 9px 13px rgba(24,13,35,.28),
+    0 0 0 1px rgba(255,255,255,.12)
+}
+.arrow-piece:after{
+  content:"";position:absolute;left:-45%;top:-30%;width:34%;height:150%;background:rgba(255,255,255,.2);
+  transform:rotate(24deg);animation:piece-sheen 3.6s ease-in-out infinite
+}
+@keyframes piece-sheen{0%,58%{left:-45%}78%,100%{left:130%}}
+.arrow-piece.is-exiting{filter:brightness(1.2) saturate(1.15) drop-shadow(0 0 12px rgba(255,245,145,.7))}
+
+.tool-orb{
+  width:32px!important;height:32px!important;border-radius:11px!important;display:grid!important;place-items:center!important;
+  font-size:16px!important;font-weight:1000!important;color:#59320e!important;
+  background:linear-gradient(#fff774,#efaa1f)!important;border:2px solid #7c4814!important;box-shadow:0 3px 0 #5f3510!important
+}
+.restart-orb{font-size:20px!important}
+
+.mini-chest-art{
+  width:54px;height:49px;object-fit:contain;filter:drop-shadow(0 5px 3px rgba(40,23,43,.3));
+  animation:mini-chest-bob 1.25s ease-in-out infinite alternate
+}
+@keyframes mini-chest-bob{to{transform:translateY(-4px) rotate(2deg);filter:drop-shadow(0 8px 5px rgba(40,23,43,.27)) brightness(1.06)}}
+.mini-chest-art.ready{filter:drop-shadow(0 5px 3px rgba(40,23,43,.3)) drop-shadow(0 0 12px rgba(255,224,75,.65))}
+
+.arena-camp{min-height:145px}
+.camp-chest-art{
+  position:absolute;z-index:4!important;left:8px!important;bottom:0!important;width:108px!important;height:92px!important;
+  object-fit:contain;filter:drop-shadow(0 7px 6px rgba(64,36,28,.28));animation:camp-chest 1.7s ease-in-out infinite alternate
+}
+.camp-mascot{
+  position:absolute;z-index:5;right:-7px;bottom:-18px;width:93px;height:114px;object-fit:contain;
+  filter:drop-shadow(0 8px 5px rgba(51,30,42,.27));animation:camp-mascot 1.45s ease-in-out infinite alternate
+}
+@keyframes camp-mascot{to{transform:translateY(-6px) rotate(1.5deg)}}
+.camp-copy{left:109px;right:72px;top:24px}
+.camp-rock{opacity:.72}
+.flag-two{display:none}
+
+.arrow-modal:before{
+  content:"";position:absolute;z-index:-1;left:50%;top:-96px;transform:translateX(-50%);
+  width:190px;height:190px;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,rgba(255,236,107,.36) 0 8deg,transparent 8deg 18deg);
+  animation:modal-rays 8s linear infinite
+}
+@keyframes modal-rays{to{transform:translateX(-50%) rotate(360deg)}}
+
+@media(max-width:390px){
+  .camp-mascot{width:80px;height:99px;right:-8px}.camp-copy{right:60px;left:96px}
+}
