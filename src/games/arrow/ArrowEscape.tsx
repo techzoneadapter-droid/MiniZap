@@ -269,6 +269,19 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
         <div className="treasure-count">{chestStep}/5</div>
       </section>
 
+      <section className="arena-camp" aria-hidden="true">
+        <div className="camp-rock rock-one" />
+        <div className="camp-rock rock-two" />
+        <div className="camp-flag flag-one">⚡</div>
+        <div className="camp-flag flag-two">★</div>
+        <img src="/art/treasure-chest.svg" alt="" />
+        <div className="camp-copy">
+          <small>VICTORY CAMP</small>
+          <b>{chestReady ? 'Golden chest unlocked!' : 'Keep clearing the arena'}</b>
+          <span>{chestReady ? 'Finish this level and claim the reward.' : `Only ${5 - chestStep} wins until your next treasure.`}</span>
+        </div>
+      </section>
+
       {phase !== 'playing' && (
         <div className="arrow-overlay">
           <div className="confetti" aria-hidden="true">
