@@ -108,7 +108,7 @@
 
 .confetti{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none}
 .confetti i{
-  --i:0;position:absolute;top:-12%;left:calc(4% + (var(--i) * 7.6%));width:9px;height:17px;border-radius:3px;
+  --i:0;position:absolute;top:-12%;left:var(--left,4%);width:9px;height:17px;border-radius:3px;
   background:hsl(calc(var(--i) * 31),85%,61%);transform:rotate(calc(var(--i) * 27deg));
   animation:confetti-fall 1.5s ease-out calc(var(--i) * -.035s) infinite
 }
