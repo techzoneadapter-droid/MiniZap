@@ -339,3 +339,125 @@ body{
   .hero-copy{width:65%}.hero-copy h1{font-size:28px}.hero-tower{right:8px;transform:scale(.95)}
   .home-event-row{gap:6px}.event-card{grid-template-columns:37px 1fr;padding:7px 6px}.event-icon{width:36px;height:36px;font-size:20px}
 }
+
+
+/* ==========================================================================
+   KINGDOM MAP HOME — scene-first redesign
+   ========================================================================== */
+.world-home{padding-top:2px}
+.kingdom-hub{
+  position:relative;min-height:378px;margin-top:2px;border-radius:30px;overflow:hidden;
+  border:5px solid #6c3b1d;background:linear-gradient(#7fdcff,#dff7cf);
+  box-shadow:0 8px 0 #4e2b16,0 12px 0 #c89a4f,0 20px 35px rgba(50,31,42,.22),inset 0 0 0 3px #ebce7a
+}
+.kingdom-hub:before{
+  content:"";position:absolute;z-index:2;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,rgba(255,255,255,.2),transparent 20%,transparent 75%,rgba(255,229,117,.1))
+}
+.kingdom-heading{
+  position:absolute;z-index:6;left:15px;top:13px;right:15px;text-align:center;pointer-events:none
+}
+.kingdom-heading span{
+  display:inline-block;padding:4px 10px;border-radius:12px;background:linear-gradient(#fff275,#f1aa1d);
+  border:3px solid #6f3d13;box-shadow:0 3px 0 #5a3011;color:#58320f;font-size:7px;font-weight:1000;letter-spacing:1px
+}
+.kingdom-heading h1{
+  margin:7px 0 0;font-size:27px;line-height:.95;text-transform:uppercase;color:white;
+  text-shadow:-2px -2px 0 #35214e,2px -2px 0 #35214e,-2px 2px 0 #35214e,2px 2px 0 #35214e,0 5px 0 #35214e
+}
+.kingdom-art{position:absolute;z-index:1;inset:58px 0 0;width:100%;height:calc(100% - 58px);object-fit:cover;object-position:center bottom}
+.world-node{
+  position:absolute;z-index:7;display:grid;grid-template-columns:38px 1fr;align-items:center;gap:6px;
+  min-width:132px;border-radius:16px;padding:6px 8px;text-align:left;color:white;
+  border:3px solid #3c2554;background:linear-gradient(#764baa,#4b2b70);
+  box-shadow:0 5px 0 #321b4b,inset 0 2px rgba(255,255,255,.22),0 8px 15px rgba(34,21,45,.18);
+  animation:world-node-bob 1.9s ease-in-out infinite alternate
+}
+.world-node:active{transform:translateY(3px)!important;box-shadow:0 2px 0 #321b4b}
+.world-node .node-icon{
+  width:35px;height:35px;border-radius:11px;display:grid;place-items:center;font-size:22px;
+  background:linear-gradient(#ffd95c,#ef941b);border:2px solid #744014;box-shadow:0 3px 0 #59310f
+}
+.world-node small,.world-node b{display:block}.world-node small{font-size:6px;color:#e7d8f3;letter-spacing:.8px}.world-node b{font-size:10px;line-height:1.05}
+.node-left{left:12px;bottom:78px;transform:rotate(-2deg)}.node-center{left:50%;bottom:18px;transform:translateX(-50%);background:linear-gradient(#d24b62,#97324d);border-color:#652035;box-shadow:0 5px 0 #541c2d,inset 0 2px rgba(255,255,255,.22)}
+.node-right{right:12px;bottom:78px;transform:rotate(2deg)}
+.node-right .node-icon{background:linear-gradient(#7cf3ff,#3ca6e8);border-color:#285e87;box-shadow:0 3px 0 #214a6d}
+@keyframes world-node-bob{to{margin-bottom:4px;filter:brightness(1.05)}}
+.map-badge{
+  position:absolute;z-index:7;right:10px;top:64px;display:flex;align-items:center;gap:5px;
+  background:linear-gradient(#4f3372,#342146);border:2px solid #251632;border-radius:12px;padding:5px 8px;
+  box-shadow:0 3px 0 #21132f;color:white
+}
+.map-badge>span{font-size:20px}.map-badge small,.map-badge b{display:block}.map-badge small{font-size:5px;color:#cebde1}.map-badge b{font-size:9px;color:#ffe76b}
+
+.kingdom-status{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0 18px}
+.kingdom-status button{
+  min-height:88px;position:relative;overflow:hidden;display:grid;grid-template-columns:55px 1fr 14px;align-items:center;gap:4px;
+  border:4px solid #644022;border-radius:19px;padding:6px 7px;text-align:left;
+  box-shadow:0 5px 0 #4f2e17,inset 0 3px rgba(255,255,255,.35),0 9px 14px rgba(54,34,31,.12)
+}
+.league-panel{background:linear-gradient(145deg,#9a6ad3,#5a367f)}
+.chest-panel{background:linear-gradient(145deg,#f2a536,#c5611f)}
+.kingdom-status img{width:54px;height:58px;object-fit:contain;filter:drop-shadow(0 5px 4px rgba(35,20,41,.25))}
+.kingdom-status small,.kingdom-status strong,.kingdom-status span{display:block}
+.kingdom-status small{font-size:5.5px;letter-spacing:.75px;color:#f3e9ff;font-weight:1000}
+.kingdom-status strong{font-size:11px;color:white;text-shadow:0 2px rgba(45,22,50,.35);margin:1px 0}
+.kingdom-status span{font-size:6.5px;color:#ffe88a;font-weight:800}
+.panel-chevron{font-size:23px;color:white;text-shadow:0 2px rgba(0,0,0,.24)}
+
+.battle-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.battle-tile{
+  --tile-a:#ff9f43;position:relative;min-height:158px;overflow:hidden;border-radius:22px;
+  border:4px solid #653a1b;text-align:left;padding:10px;color:white;
+  background:
+    radial-gradient(circle at 50% 22%,rgba(255,255,255,.24),transparent 28%),
+    linear-gradient(145deg,var(--tile-a),#69409b);
+  box-shadow:0 6px 0 #4c2b17,0 9px 0 rgba(226,184,103,.26),inset 0 3px rgba(255,255,255,.25)
+}
+.tile-1{--tile-a:#ff9648;background:linear-gradient(145deg,#ffad59,#e65a3d 58%,#8b3a55)}
+.tile-2{--tile-a:#8d69e9;background:linear-gradient(145deg,#a886ff,#6545bc 58%,#432979)}
+.tile-3{--tile-a:#57da78;background:linear-gradient(145deg,#83ec8f,#46b95b 58%,#327c50)}
+.tile-4{--tile-a:#55cff6;background:linear-gradient(145deg,#74e5ff,#3ba5e8 58%,#4166bd)}
+.battle-tile:before{
+  content:"";position:absolute;right:-35px;bottom:-45px;width:120px;height:120px;border-radius:50%;
+  background:rgba(38,21,51,.16);box-shadow:-28px -18px 0 rgba(255,255,255,.05)
+}
+.tile-glow{position:absolute;left:12px;top:8px;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle,rgba(255,247,154,.34),transparent 70%);animation:tile-glow 1.5s ease-in-out infinite alternate}
+@keyframes tile-glow{to{transform:scale(1.16);opacity:.65}}
+.tile-rank{
+  position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(#fff06a,#eaa11a);border:2px solid #744111;color:#61350f;font-size:10px;font-weight:1000;
+  box-shadow:0 3px 0 #5b3110
+}
+.tile-icon{position:relative;z-index:2;font-size:50px;height:68px;display:flex;align-items:center;filter:drop-shadow(0 6px 0 rgba(49,24,52,.25));animation:tile-icon-float 1.5s ease-in-out infinite alternate}
+@keyframes tile-icon-float{to{transform:translateY(-4px) rotate(2deg)}}
+.tile-copy{position:relative;z-index:2}.tile-copy small{display:block;font-size:6px;letter-spacing:.9px;color:#ffe788;font-weight:1000}.tile-copy b{display:block;font-size:14px;line-height:1.05;text-shadow:0 2px rgba(45,22,50,.35);margin:2px 0}.tile-copy span{font-size:7px;color:#f4e9ff;font-weight:700}
+.tile-play{
+  position:absolute;z-index:3;right:9px;bottom:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(#8df185,#42b950);border:3px solid #246d2e;box-shadow:0 4px 0 #245f2a;color:white;font-size:11px;padding-left:2px
+}
+
+.quest-banner{
+  margin:17px 0 5px;position:relative;display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:8px;
+  border-radius:20px;border:4px solid #553072;padding:9px;background:
+    radial-gradient(circle at 12% 50%,rgba(255,234,99,.27),transparent 24%),
+    linear-gradient(120deg,#8a5aca,#5b3489);
+  box-shadow:0 6px 0 #412257,inset 0 3px rgba(255,255,255,.18)
+}
+.quest-emblem{
+  width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:28px;
+  background:linear-gradient(#fff06a,#f19b1c);border:3px solid #754010;box-shadow:0 4px 0 #5b2f0d
+}
+.quest-banner small,.quest-banner strong,.quest-banner span{display:block}.quest-banner small{font-size:6px;color:#e7d6f2;font-weight:1000;letter-spacing:.8px}.quest-banner strong{font-size:11px;color:white;margin:2px 0}.quest-banner span{font-size:7px;color:#ffe67a}
+.quest-banner button{
+  border:3px solid #236b2e;border-radius:12px;background:linear-gradient(#83ee7d,#41b84e);color:white;font-size:9px;font-weight:1000;
+  padding:10px 6px;box-shadow:0 4px 0 #245d29
+}
+
+@media(max-width:390px){
+  .kingdom-hub{min-height:342px}.kingdom-heading h1{font-size:23px}.kingdom-art{inset:53px 0 0;height:calc(100% - 53px)}
+  .world-node{min-width:112px;grid-template-columns:31px 1fr;padding:5px}.world-node .node-icon{width:29px;height:29px;font-size:18px}.world-node b{font-size:8.5px}
+  .node-left,.node-right{bottom:69px}.node-left{left:7px}.node-right{right:7px}.node-center{bottom:13px}
+  .kingdom-status button{grid-template-columns:45px 1fr 10px;min-height:78px}.kingdom-status img{width:44px;height:50px}
+  .battle-tile{min-height:145px}
+}
