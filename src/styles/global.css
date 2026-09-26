@@ -461,3 +461,119 @@ body{
   .kingdom-status button{grid-template-columns:45px 1fr 10px;min-height:78px}.kingdom-status img{width:44px;height:50px}
   .battle-tile{min-height:145px}
 }
+
+
+/* ==========================================================================
+   ASSET-FIRST ART PASS — removes prototype/text-icon feel
+   ========================================================================== */
+.premium-player{min-width:145px}
+.portrait-wrap{
+  position:relative;z-index:2;width:54px;height:54px;border-radius:17px;overflow:hidden;
+  background:linear-gradient(#9c73e7,#5a388f);border:4px solid #5a3218;
+  box-shadow:0 5px 0 #402311,inset 0 2px rgba(255,255,255,.35),0 7px 11px rgba(42,24,48,.18)
+}
+.portrait-wrap:after{
+  content:"";position:absolute;inset:3px;border-radius:11px;border:2px solid rgba(255,236,162,.55);pointer-events:none
+}
+.portrait-wrap img{
+  position:absolute;width:79px;height:86px;left:-13px;top:-10px;object-fit:contain;
+  filter:drop-shadow(0 4px 3px rgba(46,25,46,.23))
+}
+.portrait-level{
+  position:absolute;z-index:3;right:-2px;bottom:-2px;width:22px;height:22px;border-radius:50%;
+  display:grid;place-items:center;background:linear-gradient(#fff36c,#e99616);border:2px solid #6e3d12;
+  color:#57300d;font-size:9px;font-weight:1000;box-shadow:0 2px 0 #4f2a0d
+}
+.premium-player .level-copy{margin-left:-7px;padding-left:13px;min-width:103px}
+.premium-player .level-copy small{display:block;color:#cfbfe0;font-size:6px;font-weight:800;margin:1px 0 3px;letter-spacing:.25px}
+
+.premium-currency-row{gap:8px}
+.premium-currency-row .currency-pill{
+  min-width:72px;padding-left:25px;height:34px
+}
+.premium-currency-row .currency-pill img{
+  position:absolute;left:-10px;width:34px;height:34px;object-fit:contain;z-index:2;
+  filter:drop-shadow(0 3px 2px rgba(29,16,37,.28))
+}
+.premium-currency-row .currency-pill>span{display:none}
+
+.cinematic-hub{min-height:390px;background:linear-gradient(#86dcff,#ddf8d2)}
+.cinematic-hub:after{
+  content:"";position:absolute;z-index:5;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 24%,rgba(255,255,255,.75) 0 2px,transparent 3px),
+    radial-gradient(circle at 79% 18%,rgba(255,247,157,.8) 0 2px,transparent 3px),
+    radial-gradient(circle at 88% 44%,rgba(255,255,255,.55) 0 1px,transparent 2px),
+    radial-gradient(circle at 28% 52%,rgba(255,238,112,.5) 0 1px,transparent 2px);
+  background-size:77px 77px,104px 104px,63px 63px,89px 89px;
+  animation:hub-sparkle 4s linear infinite
+}
+@keyframes hub-sparkle{to{background-position:24px -12px,-18px 20px,13px 18px,-14px -23px}}
+
+.kingdom-mascot{
+  position:absolute;z-index:6;left:50%;bottom:33px;width:96px;height:112px;object-fit:contain;
+  transform:translateX(-50%);filter:drop-shadow(0 9px 7px rgba(53,31,40,.26));
+  animation:mascot-bob 1.6s ease-in-out infinite alternate;pointer-events:none
+}
+@keyframes mascot-bob{to{transform:translateX(-50%) translateY(-6px) rotate(1deg)}}
+.mascot-bubble{
+  position:absolute;z-index:8;left:50%;bottom:125px;transform:translateX(-50%);
+  background:linear-gradient(#fff7d9,#e8c88f);border:3px solid #69401f;border-radius:13px 13px 13px 4px;
+  color:#54351f;padding:5px 8px;box-shadow:0 4px 0 #4d2c17;min-width:76px;text-align:center;
+  animation:bubble-pop 1.7s ease-in-out infinite alternate
+}
+.mascot-bubble:after{
+  content:"";position:absolute;left:12px;bottom:-9px;border-top:10px solid #69401f;border-right:9px solid transparent
+}
+.mascot-bubble b,.mascot-bubble span{display:block}.mascot-bubble b{font-size:9px}.mascot-bubble span{font-size:6px;color:#7d593d}
+@keyframes bubble-pop{to{transform:translateX(-50%) translateY(-3px)}}
+
+.world-node{grid-template-columns:46px 1fr;min-width:142px;padding:5px 7px 5px 3px}
+.world-node>img{
+  width:48px;height:43px;object-fit:contain;filter:drop-shadow(0 4px 3px rgba(38,21,44,.28));
+  transform:scale(1.12)
+}
+.world-node .node-icon{display:none}
+.node-center>img{width:43px;height:45px}
+.map-badge{
+  width:54px;height:54px;border-radius:50%;display:grid;grid-template-columns:1fr;place-items:center;text-align:center;padding:3px;
+  background:linear-gradient(#ff755f,#c83d4f);border:4px solid #6e2432;box-shadow:0 4px 0 #501a25,inset 0 3px rgba(255,255,255,.35)
+}
+.map-badge>span{font-size:17px;font-weight:1000;color:#fff5ab;line-height:1}.map-badge div{margin-top:-4px}.map-badge small{font-size:4px}.map-badge b{font-size:6px}
+
+.battle-tile{
+  min-height:178px;padding:6px 9px 10px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(145deg,#6d4695,#422760)
+}
+.tile-arena-art{
+  position:absolute;z-index:2;left:50%;top:3px;transform:translateX(-50%);
+  width:116px;height:104px;object-fit:contain;filter:drop-shadow(0 8px 6px rgba(46,25,45,.3));
+  animation:arena-art-bob 1.8s ease-in-out infinite alternate
+}
+@keyframes arena-art-bob{to{transform:translateX(-50%) translateY(-4px) scale(1.025)}}
+.tile-icon{display:none}
+.tile-copy{padding-top:99px}
+.tile-copy b{font-size:14px}
+.tile-rank{z-index:4}
+.tile-play{z-index:5}
+.battle-tile:after{
+  content:"";position:absolute;z-index:1;left:11%;right:11%;top:69px;height:24px;border-radius:50%;
+  background:rgba(42,24,53,.22);filter:blur(1px)
+}
+
+.quest-banner{overflow:hidden;grid-template-columns:58px 1fr 52px;min-height:74px}
+.quest-hero{
+  position:absolute;left:-8px;bottom:-20px;width:78px;height:96px;object-fit:contain;
+  filter:drop-shadow(0 6px 4px rgba(41,22,48,.28));animation:quest-hero-bob 1.3s ease-in-out infinite alternate
+}
+@keyframes quest-hero-bob{to{transform:translateY(-4px) rotate(-2deg)}}
+.quest-banner>div:not(.quest-emblem){grid-column:2}
+.quest-emblem{display:none}
+
+@media(max-width:390px){
+  .premium-player{min-width:126px}.portrait-wrap{width:48px;height:49px}.portrait-wrap img{width:70px;height:78px}
+  .premium-currency-row{gap:4px}.premium-currency-row .currency-pill{min-width:61px;padding-left:22px}.premium-currency-row .currency-pill img{width:30px;height:30px}
+  .cinematic-hub{min-height:365px}.kingdom-mascot{width:82px;height:98px;bottom:30px}.mascot-bubble{bottom:112px}
+  .world-node{min-width:115px;grid-template-columns:37px 1fr}.world-node>img{width:40px;height:37px}.node-center>img{width:37px;height:39px}
+  .battle-tile{min-height:164px}.tile-arena-art{width:102px;height:92px}.tile-copy{padding-top:86px}
+}
