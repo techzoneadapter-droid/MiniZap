@@ -329,3 +329,62 @@
   .arrow-board-wrap{padding:10px}.arrow-board{gap:5px;padding:7px}
   .arrow-tools{grid-template-columns:1fr 68px 1fr}
 }
+
+
+/* ==========================================================================
+   VICTORY CAMP — fills tall mobile screens with a real game-world scene
+   ========================================================================== */
+.arrow-game{
+  min-height:100dvh;display:flex;flex-direction:column;
+}
+.arrow-treasure{margin-top:12px}
+.arena-camp{
+  position:relative;z-index:4;min-height:128px;margin-top:14px;border-radius:24px;overflow:hidden;
+  border:4px solid #6b3f1f;background:
+    radial-gradient(circle at 23% 35%,rgba(255,232,102,.28),transparent 22%),
+    linear-gradient(#79d36f 0 46%,#56b85a 47% 100%);
+  box-shadow:0 6px 0 #4f2d18,0 10px 0 rgba(216,176,99,.26),inset 0 3px rgba(255,255,255,.2)
+}
+.arena-camp:before{
+  content:"";position:absolute;left:-8%;right:-8%;bottom:-30px;height:76px;border-radius:50%;
+  background:linear-gradient(#a66b3d,#70452e);border-top:7px solid #c98a4e
+}
+.arena-camp:after{
+  content:"";position:absolute;left:0;right:0;bottom:42px;height:22px;
+  background:repeating-linear-gradient(90deg,transparent 0 28px,rgba(255,255,255,.05) 28px 33px);opacity:.6
+}
+.arena-camp img{
+  position:absolute;z-index:3;left:10px;bottom:6px;width:108px;height:92px;object-fit:contain;
+  filter:drop-shadow(0 7px 6px rgba(64,36,28,.28));animation:camp-chest 1.7s ease-in-out infinite alternate
+}
+@keyframes camp-chest{to{transform:translateY(-5px) rotate(1deg);filter:drop-shadow(0 10px 8px rgba(64,36,28,.25)) brightness(1.05)}}
+.camp-copy{
+  position:absolute;z-index:4;left:118px;right:14px;top:20px;padding:8px 10px;border-radius:14px;
+  background:linear-gradient(90deg,rgba(58,36,75,.9),rgba(69,41,91,.8));border:3px solid #342045;
+  box-shadow:0 4px 0 #291938,inset 0 2px rgba(255,255,255,.12)
+}
+.camp-copy small,.camp-copy b,.camp-copy span{display:block}.camp-copy small{font-size:6px;letter-spacing:1px;color:#ffdf72;font-weight:1000}.camp-copy b{font-size:12px;color:white;margin:2px 0;text-shadow:0 2px #2c1b3a}.camp-copy span{font-size:7px;color:#dfd1ec;line-height:1.35}
+.camp-rock{position:absolute;z-index:2;bottom:5px;border-radius:50% 50% 30% 30%;background:linear-gradient(#958879,#5d5147);border:3px solid #4c4139}
+.rock-one{right:24px;width:43px;height:26px;transform:rotate(8deg)}.rock-two{right:63px;width:31px;height:20px;transform:rotate(-12deg)}
+.camp-flag{
+  position:absolute;z-index:2;top:8px;width:34px;height:47px;display:flex;align-items:flex-start;justify-content:center;padding-top:7px;
+  font-size:14px;font-weight:1000;color:#fff1a5;border-left:5px solid #6a3d20;
+  filter:drop-shadow(0 3px 2px rgba(55,34,27,.2))
+}
+.camp-flag:before{
+  content:"";position:absolute;left:3px;top:0;width:31px;height:26px;background:linear-gradient(#e75d6d,#a72e49);
+  clip-path:polygon(0 0,100% 0,76% 50%,100% 100%,0 100%);border-radius:3px
+}
+.camp-flag{isolation:isolate}.camp-flag{color:transparent}.camp-flag:after{content:"⚡";position:absolute;left:12px;top:5px;color:#ffe56a;font-size:12px}
+.flag-one{left:8px}.flag-two{right:9px;transform:scale(.88)}.flag-two:after{content:"★"}
+
+@media(min-height:850px){
+  .arena-camp{min-height:150px}
+  .arena-camp img{width:125px;height:105px}
+  .camp-copy{left:130px;top:26px}
+}
+@media(max-height:700px){
+  .arena-camp{min-height:104px}
+  .arena-camp img{width:88px;height:74px}
+  .camp-copy{left:98px;top:14px}
+}
