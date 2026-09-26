@@ -204,6 +204,11 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
     <main className="arrow-game">
       <div className="arrow-sky-orb orb-a" />
       <div className="arrow-sky-orb orb-b" />
+      <div className="arrow-ambient" aria-hidden="true">
+        {Array.from({ length: 8 }, (_, index) => <i key={index} className={`ambient-${index + 1}`} />)}
+      </div>
+      <div className="arrow-hills hill-a" aria-hidden="true" />
+      <div className="arrow-hills hill-b" aria-hidden="true" />
 
       <header className="arrow-header">
         <button className="arrow-back" onClick={onBack}>‹</button>
@@ -226,7 +231,9 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       </section>
 
       <section className="arrow-board-wrap">
-        <div className="board-banner"><span>Clear every arrow</span><b>Tap only when the path is open</b></div>
+        <span className="arena-gem gem-left">◆</span>
+        <span className="arena-gem gem-right">◆</span>
+        <div className="board-banner"><span><i>⚔</i> Clear every arrow</span><b>Tap only when the path is open</b></div>
         <div className="arrow-board-stage">
           <div
             className="arrow-board"
@@ -249,7 +256,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
 
       <section className="arrow-tools">
         <button onClick={showHint}><span>💡</span><div><b>Hint</b><small>Find a safe arrow</small></div></button>
-        <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
+        <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><span className="combo-crown">♛</span><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
         <button onClick={() => resetLevel()}><span>↻</span><div><b>Restart</b><small>Try a new route</small></div></button>
       </section>
 
