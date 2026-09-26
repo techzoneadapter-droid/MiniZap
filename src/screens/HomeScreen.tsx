@@ -2,6 +2,13 @@ import { games } from '../data/games'
 import type { MiniGame } from '../types/game'
 import { SectionTitle } from '../components/SectionTitle'
 
+const arenaArt = [
+  '/art/arena-arrow.svg',
+  '/art/arena-tap.svg',
+  '/art/arena-parking.svg',
+  '/art/arena-color.svg',
+]
+
 export function HomeScreen({ onPlay }: { onPlay: (game: MiniGame) => void }) {
   const arrow = games[0]
   const tapAway = games[1]
@@ -10,32 +17,34 @@ export function HomeScreen({ onPlay }: { onPlay: (game: MiniGame) => void }) {
 
   return (
     <main className="screen home-screen world-home">
-      <section className="kingdom-hub">
+      <section className="kingdom-hub cinematic-hub">
         <div className="kingdom-heading">
-          <span>⚔ MINI ZAP KINGDOM</span>
+          <span>MINIZAP KINGDOM</span>
           <h1>Choose your arena</h1>
         </div>
 
         <img className="kingdom-art" src="/art/village-hub.svg" alt="" />
+        <img className="kingdom-mascot" src="/art/zapling-hero.svg" alt="" />
+        <div className="mascot-bubble"><b>Ready?</b><span>Pick an arena!</span></div>
 
         <button className="world-node node-left" onClick={() => onPlay(arrow)}>
-          <span className="node-icon">➹</span>
+          <img src="/art/arena-arrow.svg" alt="" />
           <div><small>ARENA 01</small><b>Arrow Escape</b></div>
         </button>
 
         <button className="world-node node-center" onClick={() => onPlay(games[4])}>
-          <span className="node-icon">♛</span>
+          <img src="/art/league-shield.svg" alt="" />
           <div><small>DAILY QUEST</small><b>Lightning Trial</b></div>
         </button>
 
         <button className="world-node node-right" onClick={() => onPlay(tapAway)}>
-          <span className="node-icon">✦</span>
+          <img src="/art/arena-tap.svg" alt="" />
           <div><small>ARENA 02</small><b>Tap Away</b></div>
         </button>
 
         <div className="map-badge">
-          <span>🔥</span>
-          <div><small>STREAK</small><b>7 DAYS</b></div>
+          <span>7</span>
+          <div><small>DAY</small><b>STREAK</b></div>
         </div>
       </section>
 
@@ -64,7 +73,7 @@ export function HomeScreen({ onPlay }: { onPlay: (game: MiniGame) => void }) {
           >
             <span className="tile-glow" />
             <span className="tile-rank">{index + 1}</span>
-            <div className="tile-icon">{game.icon}</div>
+            <img className="tile-arena-art" src={arenaArt[index]} alt="" />
             <div className="tile-copy">
               <small>{game.difficulty.toUpperCase()}</small>
               <b>{game.name}</b>
@@ -76,11 +85,11 @@ export function HomeScreen({ onPlay }: { onPlay: (game: MiniGame) => void }) {
       </section>
 
       <section className="quest-banner" onClick={() => onPlay(games[4])}>
-        <div className="quest-emblem">⚡</div>
+        <img className="quest-hero" src="/art/zapling-hero.svg" alt="" />
         <div>
           <small>LIMITED DAILY TRIAL</small>
           <strong>Beat 850 points in 45 sec</strong>
-          <span>Reward: 350 coins + treasure progress</span>
+          <span>350 coins + treasure progress</span>
         </div>
         <button>PLAY</button>
       </section>
