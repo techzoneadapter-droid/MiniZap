@@ -1,0 +1,115 @@
+.world-home{padding-top:6px;padding-bottom:102px}
+
+.kingdom-hub{
+  position:relative;min-height:410px;border-radius:28px;overflow:hidden;
+  border:4px solid #5f3b25;background:#7dd8f6;
+  box-shadow:0 7px 0 #49301f,0 12px 24px #263c5033,inset 0 0 0 3px #f1dfa9;
+  isolation:isolate
+}
+.kingdom-art{position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover}
+.kingdom-hub:after{
+  content:"";position:absolute;z-index:1;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 16% 18%,#fff7a8aa 0 2px,transparent 3px),
+    radial-gradient(circle at 76% 14%,#ffffffbb 0 2px,transparent 3px),
+    radial-gradient(circle at 86% 44%,#fff7a899 0 1px,transparent 2px);
+  background-size:77px 77px,103px 103px,66px 66px;
+  animation:kingdomSparkles 6s linear infinite
+}
+@keyframes kingdomSparkles{to{background-position:23px -17px,-31px 28px,19px 22px}}
+
+.kingdom-heading{
+  position:absolute;z-index:7;left:20px;right:20px;top:20px;text-align:center;color:#fff
+}
+.kingdom-heading>span{
+  display:block;font-size:7px;font-weight:1000;letter-spacing:1.7px;color:#587471;margin-bottom:5px
+}
+.kingdom-heading h1{
+  margin:0;font-size:29px;line-height:1;color:#fff7cf;
+  text-shadow:-2px -2px 0 #704a2e,2px -2px 0 #704a2e,-2px 2px 0 #704a2e,2px 2px 0 #704a2e,0 4px 0 #704a2e
+}
+.kingdom-heading p{font-size:9px;margin:5px 0 0;color:#517176;font-weight:800}
+
+.map-badge{
+  position:absolute;z-index:8;right:12px;top:78px;width:54px;height:54px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;background:linear-gradient(#fff5bb,#f2bd63);
+  border:3px solid #93622f;box-shadow:0 4px 0 #6f4724,inset 0 2px #fff;
+  color:#735029
+}
+.map-badge b{font-size:16px;line-height:1}.map-badge span{font-size:5px;font-weight:1000;letter-spacing:.45px;margin-top:-8px}
+
+.world-node{
+  position:absolute;z-index:5;width:112px;height:112px;border:0;background:transparent;padding:0;
+  color:#fff;text-align:center;filter:drop-shadow(0 8px 6px #31544533);
+  transition:transform .15s
+}
+.world-node:active{transform:translateY(3px) scale(.98)}
+.world-node>.arena-art{position:absolute;left:50%;top:0;transform:translateX(-50%);width:90px;height:78px;object-fit:contain}
+.world-node .node-label{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);min-width:92px;
+  border:2px solid #5a3926;border-radius:10px;background:linear-gradient(#8a5e49,#694133);
+  box-shadow:0 3px 0 #4d2f23,inset 0 1px #a88069;padding:4px 6px
+}
+.world-node .node-label small,.world-node .node-label b{display:block}.world-node .node-label small{font-size:5px;letter-spacing:.7px;color:#f4d99a}.world-node .node-label b{font-size:8px;white-space:nowrap}
+.node-ready{
+  position:absolute;z-index:4;right:3px;top:10px;padding:3px 5px;border-radius:8px;background:linear-gradient(#d8f277,#8dcc53);
+  border:2px solid #56782c;color:#476322;font-size:6px;font-weight:1000;box-shadow:0 2px 0 #405d25
+}
+.node-0{left:38px;top:116px}.node-1{right:36px;top:116px}.node-2{left:48px;top:242px}.node-3{right:42px;top:242px}
+.node-0>.arena-art,.node-2>.arena-art{transform:translateX(-50%) rotate(-2deg)}
+.node-1>.arena-art,.node-3>.arena-art{transform:translateX(-50%) rotate(2deg)}
+
+.kingdom-mascot{
+  position:absolute;z-index:6;left:50%;bottom:52px;transform:translateX(-50%);
+  width:83px;height:100px;object-fit:contain;filter:drop-shadow(0 7px 5px #422b3333);
+  animation:kingdomMascot 1.7s ease-in-out infinite alternate
+}
+@keyframes kingdomMascot{to{transform:translateX(-50%) translateY(-5px) rotate(1deg)}}
+
+.map-quest{
+  position:absolute;z-index:8;left:50%;bottom:10px;transform:translateX(-50%);
+  min-width:176px;height:43px;display:grid;grid-template-columns:34px 1fr 15px;align-items:center;gap:6px;
+  border:3px solid #60402b;border-radius:13px;background:linear-gradient(#a874d4,#744eaa);
+  color:#fff;text-align:left;box-shadow:0 4px 0 #492d67,inset 0 2px #d6b4ed;padding:4px 8px
+}
+.map-quest>span{
+  width:29px;height:29px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(#fff474,#f0af26);border:2px solid #8a571e;color:#7a4a16;font-weight:1000
+}
+.map-quest small,.map-quest div>b{display:block}.map-quest small{font-size:5px;color:#e8d9f3;letter-spacing:.65px}.map-quest div>b{font-size:9px}.map-quest>b{font-size:21px}
+
+.kingdom-status{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0 10px}
+.kingdom-status button{
+  min-height:84px;display:grid;grid-template-columns:51px 1fr 10px;align-items:center;gap:5px;
+  border:3px solid #5d402d;border-radius:16px;padding:6px;text-align:left;
+  box-shadow:0 4px 0 #4a3021,inset 0 2px #ffffff55
+}
+.league-panel{background:linear-gradient(145deg,#8c64c1,#62508b)}.chest-panel{background:linear-gradient(145deg,#f0b45b,#c97c38)}
+.kingdom-status img{width:49px;height:53px;object-fit:contain;filter:drop-shadow(0 5px 4px #37233833)}
+.kingdom-status small,.kingdom-status strong,.kingdom-status span{display:block}.kingdom-status small{font-size:5px;color:#f6e7b7;font-weight:1000;letter-spacing:.6px}.kingdom-status strong{font-size:10px;color:#fff;margin:2px 0}.kingdom-status span{font-size:6px;color:#ffefae}.kingdom-status>button>b{color:#fff;font-size:19px}
+
+.battle-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.battle-tile{
+  min-height:154px;position:relative;overflow:hidden;border:3px solid #5a3a29;border-radius:18px;
+  background:linear-gradient(#f3e2ae,#d2ad70);box-shadow:0 5px 0 #483021,inset 0 2px #fff7d6;padding:8px;color:#4b3527;text-align:left
+}
+.battle-tile:before{content:"";position:absolute;left:0;right:0;top:0;height:86px;background:linear-gradient(#aee9ef,#8dcc92);border-bottom:2px solid #6b7b5b}
+.tile-rank{position:absolute;z-index:4;right:7px;top:7px;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(#fff071,#e6a726);border:2px solid #79501d;font-size:7px;font-weight:1000}
+.tile-arena-art{position:absolute!important;z-index:2;left:50%!important;top:5px!important;transform:translateX(-50%)!important;width:95px!important;height:82px!important;object-fit:contain!important}
+.tile-copy{position:absolute;left:9px;right:42px;bottom:9px}.tile-copy small{display:block;font-size:5px;color:#886d54;font-weight:900}.tile-copy b{display:block;font-size:10px;margin-top:2px}
+.tile-play{position:absolute;right:8px;bottom:8px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#83e879,#43b84f);border:2px solid #2e7835;box-shadow:0 3px 0 #295f2e;color:#fff}
+.tile-play svg{width:14px;height:14px}
+
+.quest-banner{
+  margin:13px 0 0;min-height:72px;display:grid;grid-template-columns:57px 1fr 38px;align-items:center;gap:8px;
+  border:3px solid #563767;border-radius:16px;background:linear-gradient(120deg,#8060b7,#5a427f);
+  box-shadow:0 5px 0 #3f2c50,inset 0 2px #ffffff33;padding:6px 8px;color:#fff
+}
+.quest-banner>img{width:55px;height:55px;object-fit:contain}.quest-banner small,.quest-banner strong,.quest-banner span{display:block}.quest-banner small{font-size:5px;letter-spacing:.65px;color:#ead9f4}.quest-banner strong{font-size:9px;margin:2px 0}.quest-banner span{font-size:6px;color:#ffefa7}
+.quest-banner>button{width:34px;height:34px;border-radius:11px;border:2px solid #286e32;background:linear-gradient(#83e77a,#43b84f);box-shadow:0 3px 0 #285e2d;color:#fff}.quest-banner svg{width:14px;height:14px}
+
+@media(max-width:390px){
+  .kingdom-hub{min-height:380px}.kingdom-heading h1{font-size:25px}.node-0{left:28px}.node-1{right:25px}.node-2{left:35px}.node-3{right:31px}
+  .world-node{width:102px}.world-node>.arena-art{width:82px}.kingdom-mascot{width:74px;height:90px}
+  .map-quest{min-width:160px}.battle-tile{min-height:145px}
+}
