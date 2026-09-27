@@ -68,44 +68,66 @@ export function getAvailableMoves(
 }
 
 export function generateArrowLevel(levelNumber: number): ArrowLevel {
-  const number = Math.max(1, levelNumber)
-  const rows = number <= 3 ? 4 : number <= 12 ? 5 : 6
+  const number = Math.min(100, Math.max(1, levelNumber))
+  const rows = number <= 18 ? 4 : number <= 55 ? 5 : 6
   const cols = rows
   const maxPieces = rows * cols - 2
-  const targetPieces = Math.min(maxPieces, 6 + Math.floor(number * 1.45))
+  const targetPieces = Math.min(
+    maxPieces,
+    number <= 10
+      ? 5 + Math.ceil(number * 0.55)
+      : number <= 25
+        ? 10 + Math.floor((number - 10) * 0.32)
+        : number <= 45
+          ? 14 + Math.floor((number - 25) * 0.35)
+          : number <= 65
+            ? 20 + Math.floor((number - 45) * 0.32)
+            : 26 + Math.floor((number - 65) * 0.23),
+  )
   const random = mulberry32(92021 + number * 7919)
 
-  // Build the solution backwards. Every piece is placed only when its exit ray
-  // is clear relative to pieces that will remain after it in the solve order.
-  // Therefore reversing the placement order always produces a valid solution.
+  // Start dense, then peel one exposed cell at a time. A piece receives its
+  // direction at the exact point it becomes removable. Replaying that peel
+  // order is a guaranteed solution, while pieces assigned later are usually
+  // blocked at the start — producing the constrained openings used in late game.
+  const cells = shuffle(
+    Array.from({ length: rows * cols }, (_, id) => ({
+      id: id + 1,
+      row: Math.floor(id / cols),
+      col: id % cols,
+      direction: 'up' as ArrowDirection,
+    })),
+    random,
+  ).slice(0, targetPieces)
+  const remaining = [...cells]
   const placed: ArrowPiece[] = []
-  let attempts = 0
 
-  while (placed.length < targetPieces && attempts < 5000) {
-    attempts += 1
-    const row = Math.floor(random() * rows)
-    const col = Math.floor(random() * cols)
-    if (placed.some((piece) => piece.row === row && piece.col === col)) continue
-
-    const validDirections = shuffle(directions, random).filter((direction) =>
-      canExit({ id: -1, row, col, direction }, placed, rows, cols),
-    )
-
-    if (!validDirections.length) continue
-
-    placed.push({
-      id: placed.length + 1,
-      row,
-      col,
-      direction: validDirections[0],
+  while (remaining.length) {
+    const candidates = remaining.flatMap((piece) => {
+      const valid = shuffle(directions, random).filter((direction) =>
+        canExit({ ...piece, direction }, remaining, rows, cols),
+      )
+      return valid.length ? [{ piece, valid }] : []
     })
+    const constrained = candidates.filter(({ piece, valid }) =>
+      valid.some((direction) => !canExit({ ...piece, direction }, placed, rows, cols)),
+    )
+    const pool = constrained.length ? constrained : candidates
+    const choice = pool[Math.floor(random() * pool.length)]
+    const deceptiveDirections = choice.valid.filter((direction) =>
+      !canExit({ ...choice.piece, direction }, placed, rows, cols),
+    )
+    const directionPool = deceptiveDirections.length ? deceptiveDirections : choice.valid
+    const direction = directionPool[Math.floor(random() * directionPool.length)]
+    placed.push({ ...choice.piece, direction })
+    remaining.splice(remaining.findIndex((piece) => piece.id === choice.piece.id), 1)
   }
 
   return {
     number,
     rows,
     cols,
-    reward: 45 + number * 5,
+    reward: 45 + Math.floor((number - 1) / 10) * 5,
     pieces: shuffle(placed, random),
   }
 }

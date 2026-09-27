@@ -2,6 +2,7 @@ import { GameIcon } from '../../components/GameIcon'
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { maybeShowInterstitial, requestRewarded } from '../../services/ads'
 import { playSfx } from '../../services/sfx'
+import { chapterFor, levelReward, loadProgress, saveProgress } from '../gameUtils'
 import {
   canExit,
   generateArrowLevel,
@@ -26,8 +27,9 @@ interface Feedback {
 const progressKey = 'minizap-arrow-level'
 
 function loadStartingLevel() {
-  const saved = Number(window.localStorage.getItem(progressKey) ?? '1')
-  return Number.isFinite(saved) && saved > 0 ? Math.floor(saved) : 1
+  const legacy = Number(window.localStorage.getItem(progressKey) ?? '1')
+  const saved = Math.max(loadProgress('arrow').level, Number.isFinite(legacy) ? legacy : 1)
+  return Math.min(100, Math.max(1, Math.floor(saved)))
 }
 
 export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
@@ -43,6 +45,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
   const [feedback, setFeedback] = useState<Feedback | null>(null)
   const [levelIntro, setLevelIntro] = useState(true)
   const [bonusClaimed, setBonusClaimed] = useState(false)
+  const [earnedReward, setEarnedReward] = useState(level.reward)
 
   const totalPieces = level.pieces.length
   const cleared = totalPieces - pieces.length
@@ -50,6 +53,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
   const stars = mistakes === 0 ? 3 : mistakes === 1 ? 2 : 1
   const chestStep = ((level.number - 1) % 5) + 1
   const chestReady = level.number % 5 === 0
+  const chapter = chapterFor(level.number)
 
   useEffect(() => {
     setLevelIntro(true)
@@ -77,6 +81,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
     setCombo(0)
     setFeedback(null)
     setBonusClaimed(false)
+    setEarnedReward(next.reward)
     setLevelIntro(true)
     window.setTimeout(() => setLevelIntro(false), 720)
     playSfx('level')
@@ -99,6 +104,8 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
 
       if (nextMistakes >= 3) {
         window.setTimeout(() => {
+          const progress = loadProgress('arrow')
+          saveProgress('arrow', { ...progress, streak: 0 })
           playSfx('lose')
           setPhase('lost')
         }, 260)
@@ -117,7 +124,23 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       setPieces((current) => {
         const next = current.filter((item) => item.id !== piece.id)
         if (next.length === 0) {
-          const reward = level.reward
+          const progress = loadProgress('arrow')
+          const rating = mistakes === 0 ? 3 : mistakes === 1 ? 2 : 1
+          const milestone = levelReward(level.number, rating).milestone
+          const milestoneKey = `minizap-arrow-milestone-${level.number}`
+          const milestoneAvailable = milestone > 0 && !window.localStorage.getItem(milestoneKey)
+          if (milestoneAvailable) window.localStorage.setItem(milestoneKey, 'claimed')
+          const reward = level.reward + (milestoneAvailable ? milestone : 0)
+          const nextStreak = progress.streak + 1
+          setEarnedReward(reward)
+          saveProgress('arrow', {
+            ...progress,
+            level: Math.max(progress.level, Math.min(100, level.number + 1)),
+            stars: { ...progress.stars, [level.number]: Math.max(progress.stars[level.number] ?? 0, rating) },
+            best: Math.max(progress.best, score),
+            streak: nextStreak,
+            bestStreak: Math.max(progress.bestStreak, nextStreak),
+          })
           onEarnCoins(reward, `+${reward} coins · Level ${level.number} cleared!`)
           window.setTimeout(() => {
             playSfx('win')
@@ -166,7 +189,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
   }
 
   async function nextLevel() {
-    const next = level.number + 1
+    const next = Math.min(100, level.number + 1)
     window.localStorage.setItem(progressKey, String(next))
     await maybeShowInterstitial(level.number)
     setLevelNumber(next)
@@ -213,8 +236,8 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       <header className="arrow-header">
         <button aria-label="Back to kingdom" className="arrow-back" onClick={onBack}>‹</button>
         <div className="arrow-title">
-          <small>ARROW ESCAPE</small>
-          <strong>Level {level.number}</strong>
+          <small>CHAPTER {chapter.tier} · {chapter.name.toUpperCase()}</small>
+          <strong>Level {level.number} <em>/ 100</em></strong>
         </div>
         <div className="arrow-score"><small>SCORE</small><b>{score}</b></div>
       </header>
@@ -269,20 +292,6 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
         <div className="treasure-count">{chestStep}/5</div>
       </section>
 
-      <section className="arena-camp" aria-hidden="true">
-        <div className="camp-rock rock-one" />
-        <div className="camp-rock rock-two" />
-        <div className="camp-flag flag-one">⚡</div>
-        <div className="camp-flag flag-two">★</div>
-        <img className="camp-chest-art" src="/art/treasure-chest.svg" alt="" />
-        <img className="camp-mascot" src="/art/zapling-hero.svg" alt="" />
-        <div className="camp-copy">
-          <small>VICTORY CAMP</small>
-          <b>{chestReady ? 'Golden chest unlocked!' : 'Keep clearing the arena'}</b>
-          <span>{chestReady ? 'Finish this level and claim the reward.' : `Only ${5 - chestStep} wins until your next treasure.`}</span>
-        </div>
-      </section>
-
       {phase !== 'playing' && (
         <div className="arrow-overlay">
           <div className="confetti" aria-hidden="true">
@@ -296,8 +305,8 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
               <>
                 <div className="modal-stars">{[0, 1, 2].map(index => <GameIcon key={index} name="star" className={index < stars ? 'earned' : 'unearned'} />)}</div>
                 <div className="modal-scoreline"><span>Score</span><b>{score}</b><span>Combo</span><b>{Math.max(1, combo)}×</b></div>
-                <div className="modal-reward"><img src="/art/resource-coin.svg" alt="" /><b>+{level.reward}</b> coins</div>
-                <button className="arrow-main-action" onClick={nextLevel}>NEXT LEVEL <span><GameIcon name="play" /></span></button>
+                <div className="modal-reward"><img src="/art/resource-coin.svg" alt="" /><b>+{earnedReward}</b> coins</div>
+                <button className="arrow-main-action" onClick={nextLevel}>{level.number === 100 ? 'PLAY AGAIN' : 'NEXT LEVEL'} <span><GameIcon name="play" /></span></button>
                 <button className={`double-reward ${bonusClaimed ? 'claimed' : ''}`} onClick={claimDoubleCoins} disabled={bonusClaimed}>
                   <span><GameIcon name="play" /></span>{bonusClaimed ? 'BONUS CLAIMED' : `2× COINS · +${level.reward}`}
                 </button>

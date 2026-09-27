@@ -1448,6 +1448,82 @@
   width: 22px;
   height: 23px;
 }
+
+/* Active play is a viewport scene, never a document-length page. */
+.arrow-game {
+  width: min(100%, 540px);
+  height: 100dvh;
+  min-height: 0;
+  padding: calc(8px + env(safe-area-inset-top)) 12px calc(9px + env(safe-area-inset-bottom));
+  overflow: hidden;
+}
+.arrow-title strong em {
+  font-size: 10px;
+  font-style: normal;
+  color: #70869a;
+}
+.arrow-header {
+  flex: 0 0 auto;
+  padding: 5px 7px;
+}
+.arrow-title strong { font-size: 20px; }
+.arrow-title small { font-size: 7px; letter-spacing: .8px; }
+.arrow-status {
+  flex: 0 0 auto;
+  margin: 8px 3px 9px;
+  padding: 6px 8px;
+}
+.arrow-board-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 8px 7px 7px;
+  display: flex;
+  flex-direction: column;
+}
+.board-banner { flex: 0 0 auto; padding: 0 4px 6px; }
+.arrow-board-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+}
+.arrow-board {
+  width: min(100%, 52dvh, 410px);
+  max-height: 100%;
+  padding: 7px;
+  gap: 5px;
+}
+.arrow-tools {
+  flex: 0 0 52px;
+  min-height: 0;
+  margin-top: 8px;
+}
+.arrow-tools > button { min-height: 48px; padding: 5px 7px; }
+.arrow-treasure {
+  flex: 0 0 54px;
+  min-height: 0;
+  margin-top: 8px;
+  padding: 5px 8px;
+}
+.mini-chest-art { height: 43px; }
+.arrow-overlay {
+  overflow: hidden;
+  padding: 45px 20px 24px;
+}
+.arrow-modal {
+  max-height: calc(100dvh - 70px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.arrow-modal::-webkit-scrollbar { display: none; }
+@media (max-height: 690px) {
+  .arrow-game { padding-top: calc(5px + env(safe-area-inset-top)); }
+  .arrow-treasure { display: none; }
+  .arrow-tools { margin-top: 6px; flex-basis: 47px; }
+  .arrow-tools > button { min-height: 43px; }
+  .arrow-status { margin: 6px 3px 7px; }
+  .board-banner b { display: none; }
+}
 .arrow-restart .game-icon {
   width: 21px;
   height: 21px;

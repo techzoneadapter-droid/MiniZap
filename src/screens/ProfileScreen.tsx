@@ -1,5 +1,11 @@
 import { GameIcon } from '../components/GameIcon'
+import { games } from '../data/games'
+import { loadProgress } from '../games/gameUtils'
 export function ProfileScreen() {
+  const progress = games.map((game) => loadProgress(game.id))
+  const levelsWon = progress.reduce((total, game) => total + Object.keys(game.stars).length, 0)
+  const stars = progress.reduce((total, game) => total + Object.values(game.stars).reduce((sum, value) => sum + value, 0), 0)
+  const bestStreak = Math.max(0, ...progress.map((game) => game.bestStreak))
   return (
     <main className="screen profile-screen-premium">
       <div className="destination-heading">
@@ -32,18 +38,18 @@ export function ProfileScreen() {
       <section className="stats-grid">
         <div>
           <img src="/art/nav-rewards.svg" alt="" />
-          <strong>7</strong>
+          <strong>{bestStreak}</strong>
           <small>Best streak</small>
         </div>
         <div>
           <img src="/art/resource-coin.svg" alt="" />
-          <strong>86</strong>
+          <strong>{levelsWon}</strong>
           <small>Levels won</small>
         </div>
         <div>
           <img src="/art/nav-games.svg" alt="" />
-          <strong>74%</strong>
-          <small>Win rate</small>
+          <strong>{stars}</strong>
+          <small>Stars earned</small>
         </div>
         <div>
           <img src="/art/resource-coin.svg" alt="" />

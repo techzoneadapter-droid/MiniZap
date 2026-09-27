@@ -2,6 +2,7 @@ import { GameIcon } from './GameIcon'
 import { ArenaArt } from './ArenaArt'
 import type { CSSProperties } from 'react'
 import type { MiniGame } from '../types/game'
+import { loadProgress } from '../games/gameUtils'
 
 export function GameCard({
   game,
@@ -10,6 +11,8 @@ export function GameCard({
   game: MiniGame
   onPlay: (game: MiniGame) => void
 }) {
+  const progress = loadProgress(game.id)
+  const completed = Object.keys(progress.stars).length
   return (
     <button
       className="game-card"
@@ -32,8 +35,9 @@ export function GameCard({
         <h3>{game.name}</h3>
         <p>{game.subtitle}</p>
         <div className="game-meta">
-          <span>{game.levels} levels</span>
+          <span>{completed} / {game.levels} complete</span>
           <span>{game.difficulty}</span>
+          {progress.best > 0 && <span>Best {progress.best.toLocaleString()}</span>}
         </div>
       </div>
       <span className="play-orb">
