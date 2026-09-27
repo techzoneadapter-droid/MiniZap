@@ -1,3 +1,4 @@
+import { GameIcon } from '../components/GameIcon'
 const rewards = [
   { day: 'Day 1', value: '100', done: true },
   { day: 'Day 2', value: '5', done: true },
@@ -11,24 +12,58 @@ const rewards = [
 export function RewardsScreen() {
   return (
     <main className="screen rewards-screen-premium">
+      <div className="destination-heading">
+        <span>THE ROYAL VAULT</span>
+        <h1>Treasure room</h1>
+        <p>A little dedication. A lot of gold.</p>
+      </div>
       <section className="reward-hero">
-        <img className="reward-hero-chest" src="/art/treasure-chest.svg" alt="" />
+        <img
+          className="reward-hero-chest"
+          src="/art/treasure-chest.svg"
+          alt=""
+        />
         <span>WEEKLY TREASURE</span>
-        <h1>Keep the streak alive</h1>
+        <h2>Your next great discovery</h2>
         <p>Come back every day to upgrade the chest.</p>
         <div className="timer-pill">Next reward in 03:42:18</div>
       </section>
+      <div className="section-title">
+        <div>
+          <span>EVERY DAY IS A NEW DISCOVERY</span>
+          <h2>Seven days of treasure</h2>
+        </div>
+      </div>
       <div className="reward-grid">
         {rewards.map((r, index) => (
-          <div key={r.day} className={`reward-tile ${r.done?'done':''} ${r.active?'active':''}`}>
+          <div
+            key={r.day}
+            className={`reward-tile ${r.done ? 'done' : ''} ${r.active ? 'active' : ''}`}
+          >
             <small>{r.day}</small>
-            <img src={index % 3 === 1 ? '/art/resource-gem.svg' : '/art/resource-coin.svg'} alt="" />
+            <img
+              src={
+                r.value === 'Chest' || r.value === 'Mega'
+                  ? '/art/treasure-chest.svg'
+                  : index % 3 === 1
+                    ? '/art/resource-gem.svg'
+                    : '/art/resource-coin.svg'
+              }
+              alt=""
+            />
             <b>{r.value}</b>
-            {r.done&&<i>✓</i>}
+            {r.done && (
+              <i>
+                <GameIcon name="check" />
+              </i>
+            )}
           </div>
         ))}
       </div>
       <button className="locked-cta">CLAIM DAY 4 REWARD</button>
+      <p className="destination-note">
+        Your next treasure is always worth the journey.
+      </p>
     </main>
   )
 }

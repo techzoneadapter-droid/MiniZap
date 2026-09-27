@@ -16,19 +16,25 @@ export function TopBar({ coins, gems, level, xp }: TopBarProps) {
         <div className="level-copy">
           <strong>Zap Hero</strong>
           <small>Puzzle Raider</small>
-          <div className="xp-track"><span style={{ width: `${xp}%` }} /></div>
+          <div className="xp-track">
+            <span style={{ width: `${xp}%` }} />
+          </div>
         </div>
       </div>
       <div className="currency-row premium-currency-row">
         <div className="currency-pill coin">
-          <img src="/art/resource-coin.svg" alt="" />
+          <img src="/art/resource-coin.svg" alt="Coins" />
           <b>{coins.toLocaleString()}</b>
-          <button>+</button>
+          <span className="resource-plus" aria-hidden="true">
+            +
+          </span>
         </div>
         <div className="currency-pill gem">
-          <img src="/art/resource-gem.svg" alt="" />
+          <img src="/art/resource-gem.svg" alt="Gems" />
           <b>{gems}</b>
-          <button>+</button>
+          <span className="resource-plus" aria-hidden="true">
+            +
+          </span>
         </div>
       </div>
     </header>

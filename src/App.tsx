@@ -55,7 +55,7 @@ export default function App() {
     <div className="app-shell">
       <div className="sky-layer"><span/><span/><span/></div>
       <TopBar coins={coins} gems={42} level={12} xp={68}/>
-      {tab === 'home' && <HomeScreen onPlay={setSelectedGame}/>}
+      {tab === 'home' && <HomeScreen onPlay={setSelectedGame} onNavigate={setTab}/>}
       {tab === 'games' && <GamesScreen onPlay={setSelectedGame}/>}
       {tab === 'rewards' && <RewardsScreen/>}
       {tab === 'profile' && <ProfileScreen/>}

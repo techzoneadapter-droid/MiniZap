@@ -1,8 +1,8 @@
+import { GameIcon } from '../../components/GameIcon'
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { maybeShowInterstitial, requestRewarded } from '../../services/ads'
 import { playSfx } from '../../services/sfx'
 import {
-  arrowGlyph,
   canExit,
   generateArrowLevel,
   getAvailableMoves,
@@ -193,7 +193,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
             style={{ '--piece-hue': String((piece.id * 47 + level.number * 23) % 360) } as CSSProperties}
             onClick={() => tapPiece(piece)}
           >
-            <span>{arrowGlyph[piece.direction]}</span>
+            <GameIcon name="arrow" rotate={{ right: 0, down: 90, left: 180, up: 270 }[piece.direction]} />
           </button>
         )}
       </div>
@@ -211,7 +211,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       <div className="arrow-hills hill-b" aria-hidden="true" />
 
       <header className="arrow-header">
-        <button className="arrow-back" onClick={onBack}>‹</button>
+        <button aria-label="Back to kingdom" className="arrow-back" onClick={onBack}>‹</button>
         <div className="arrow-title">
           <small>ARROW ESCAPE</small>
           <strong>Level {level.number}</strong>
@@ -220,20 +220,20 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       </header>
 
       <section className="arrow-status">
-        <div className="heart-row" aria-label="Lives">
-          {[0, 1, 2].map((index) => <span key={index} className={index < 3 - mistakes ? 'alive' : 'lost'}>♥</span>)}
+        <div className="heart-row" aria-label={`${3 - mistakes} lives remaining`}>
+          {[0, 1, 2].map((index) => <span key={index} className={index < 3 - mistakes ? 'alive' : 'lost'}><GameIcon name="heart" /></span>)}
         </div>
         <div className="clear-progress">
           <div><span style={{ width: `${totalPieces ? (cleared / totalPieces) * 100 : 0}%` }} /></div>
           <small>{cleared}/{totalPieces} cleared</small>
         </div>
-        <button className="arrow-restart" onClick={() => resetLevel()}>↻</button>
+        <button aria-label="Restart level" className="arrow-restart" onClick={() => resetLevel()}><GameIcon name="restart" /></button>
       </section>
 
       <section className="arrow-board-wrap">
         <img className="arena-gem gem-left" src="/art/resource-gem.svg" alt="" />
         <img className="arena-gem gem-right" src="/art/resource-gem.svg" alt="" />
-        <div className="board-banner"><span><i>⚔</i> Clear every arrow</span><b>Tap only when the path is open</b></div>
+        <div className="board-banner"><span><img src="/art/arena-arrow.svg" alt="" /> Clear every arrow</span><b>Tap only when the path is open</b></div>
         <div className="arrow-board-stage">
           <div
             className="arrow-board"
@@ -256,8 +256,8 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
 
       <section className="arrow-tools">
         <button onClick={showHint}><span className="tool-orb hint-orb">?</span><div><b>Hint</b><small>Find a safe arrow</small></div></button>
-        <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><span className="combo-crown">★</span><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
-        <button onClick={() => resetLevel()}><span className="tool-orb restart-orb">↻</span><div><b>Restart</b><small>Try a new route</small></div></button>
+        <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><span className="combo-crown"><GameIcon name="star" /></span><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
+        <button onClick={() => resetLevel()}><span className="tool-orb restart-orb"><GameIcon name="restart" /></span><div><b>Restart</b><small>Try a new route</small></div></button>
       </section>
 
       <section className="arrow-treasure">
@@ -288,25 +288,25 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
           <div className="confetti" aria-hidden="true">
             {phase === 'won' && Array.from({ length: 12 }, (_, index) => <i key={index} style={{ '--i': index, '--left': `${4 + index * 7.6}%` } as CSSProperties}/>)}
           </div>
-          <div className={`arrow-modal ${phase}`}>
-            <div className="modal-emblem">{phase === 'won' ? '♛' : '☠'}</div>
+          <div role="dialog" aria-modal="true" aria-labelledby="result-title" className={`arrow-modal ${phase}`}>
+            <div className="modal-emblem"><img src={phase === 'won' ? '/art/league-shield.svg' : '/art/zapling-hero.svg'} alt="" /></div>
             <small>{phase === 'won' ? 'LEVEL CLEARED' : 'OUT OF HEARTS'}</small>
-            <h2>{phase === 'won' ? 'Brilliant escape!' : 'The arrows got you'}</h2>
+            <h2 id="result-title">{phase === 'won' ? 'Brilliant escape!' : 'The arrows got you'}</h2>
             {phase === 'won' ? (
               <>
-                <div className="modal-stars">{'★'.repeat(stars)}{'☆'.repeat(3 - stars)}</div>
+                <div className="modal-stars">{[0, 1, 2].map(index => <GameIcon key={index} name="star" className={index < stars ? 'earned' : 'unearned'} />)}</div>
                 <div className="modal-scoreline"><span>Score</span><b>{score}</b><span>Combo</span><b>{Math.max(1, combo)}×</b></div>
-                <div className="modal-reward"><span>●</span><b>+{level.reward}</b> coins</div>
-                <button className="arrow-main-action" onClick={nextLevel}>NEXT LEVEL <span>▶</span></button>
+                <div className="modal-reward"><img src="/art/resource-coin.svg" alt="" /><b>+{level.reward}</b> coins</div>
+                <button className="arrow-main-action" onClick={nextLevel}>NEXT LEVEL <span><GameIcon name="play" /></span></button>
                 <button className={`double-reward ${bonusClaimed ? 'claimed' : ''}`} onClick={claimDoubleCoins} disabled={bonusClaimed}>
-                  <span>▶</span>{bonusClaimed ? 'BONUS CLAIMED' : `2× COINS · +${level.reward}`}
+                  <span><GameIcon name="play" /></span>{bonusClaimed ? 'BONUS CLAIMED' : `2× COINS · +${level.reward}`}
                 </button>
                 <button className="arrow-text-action" onClick={() => resetLevel()}>Replay level</button>
               </>
             ) : (
               <>
                 <p>Use a revive to keep the current board, or restart and solve it from a fresh angle.</p>
-                <button className="arrow-main-action revive" onClick={revive}>▶ REVIVE</button>
+                <button className="arrow-main-action revive" onClick={revive}><GameIcon name="play" /> REVIVE</button>
                 <button className="arrow-text-action" onClick={() => resetLevel()}>Restart level</button>
               </>
             )}

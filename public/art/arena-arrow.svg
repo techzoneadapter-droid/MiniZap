@@ -1,1 +1,78 @@
-<svg width="220" height="190" viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="a" x1="110" y1="22" x2="110" y2="168"><stop stop-color="#FFB562"/><stop offset=".55" stop-color="#E75C3F"/><stop offset="1" stop-color="#91364E"/></linearGradient><filter id="s" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#392044" flood-opacity=".35"/></filter></defs><g filter="url(#s)"><path d="M33 131L54 54L109 24L166 54L189 131L165 166H54L33 131Z" fill="url(#a)" stroke="#6B341E" stroke-width="9"/><path d="M66 126L81 76H139L154 126L135 147H85L66 126Z" fill="#5B2E72" stroke="#3B1C4A" stroke-width="8"/><path d="M87 111H136M119 89L143 111L119 133" stroke="#FFF0A1" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 60L35 35L64 48" fill="#FFD64B" stroke="#7C4716" stroke-width="6"/><path d="M168 60L184 35L155 48" fill="#FFD64B" stroke="#7C4716" stroke-width="6"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" fill="none">
+  <defs>
+    <linearGradient id="roof" x2=".8" y2="1">
+      <stop stop-color="#ffbe56" />
+      <stop offset="1" stop-color="#e57539" />
+    </linearGradient>
+    <linearGradient id="stone" x2="1" y2="1">
+      <stop stop-color="#fff6d8" />
+      <stop offset="1" stop-color="#c8a779" />
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#ffbe56" stop-opacity=".7" />
+      <stop offset="1" stop-color="#ffbe56" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <ellipse cx="110" cy="172" rx="91" ry="19" fill="#223555" opacity=".2" />
+  <circle cx="110" cy="88" r="86" fill="url(#glow)" />
+  <path d="m17 150 90-38 95 38v17l-95 29-90-30z" fill="#735641" />
+  <path
+    d="m17 150 90-37 95 37-95 30z"
+    fill="#88c975"
+    stroke="#c9f19c"
+    stroke-width="3"
+  />
+  <path
+    d="m48 85 62-27 60 27v63l-60 24-62-24z"
+    fill="url(#stone)"
+    stroke="#796174"
+    stroke-width="3"
+  />
+  <path d="m110 104 60-19v63l-60 24z" fill="#ac8ea7" />
+  <path
+    d="m37 83 34-47 44-18 64 64-66 29z"
+    fill="url(#roof)"
+    stroke="#584165"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+  <path
+    d="m37 83 76 28 66-29v10l-66 27-76-27z"
+    fill="#e57539"
+    stroke="#584165"
+    stroke-width="3"
+  />
+  <path
+    d="m45 80 69 23 52-20M73 42l40 54"
+    stroke="#ffbe56"
+    stroke-width="5"
+    stroke-linecap="round"
+  />
+  <path d="M112 23V3" stroke="#6e5662" stroke-width="4" />
+  <path d="m114 3 32 7-32 10z" fill="#ff727c" />
+  <path
+    d="M57 123v23l20 8m70-43 13-5v18l-13 5z"
+    stroke="#fff3d5"
+    stroke-width="4"
+  />
+  <path
+    d="M85 127V102a25 25 0 0 1 50 0v25"
+    fill="#302a73"
+    stroke="#e5c8ff"
+    stroke-width="7"
+  />
+  <path
+    d="M94 105h30m-10-11 12 11-12 11"
+    fill="none"
+    stroke="#a6ffff"
+    stroke-width="7"
+    stroke-linejoin="round"
+  />
+  <path d="m37 146 9-9 9 9-9 9zM174 153l7-7 7 7-7 7z" fill="#e2ffa6" />
+  <path
+    d="M30 104v12m-6-6h12m146-62v12m-6-6h12"
+    stroke="#fff7b5"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+</svg>
