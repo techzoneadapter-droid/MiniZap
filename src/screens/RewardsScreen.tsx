@@ -15,22 +15,28 @@ export function RewardsScreen() {
       <div className="destination-heading">
         <span>THE ROYAL VAULT</span>
         <h1>Treasure room</h1>
-        <p>A little dedication. A lot of gold.</p>
+        <p>Return daily. Grow the hoard.</p>
       </div>
       <section className="reward-hero">
+        <div className="vault-arch" aria-hidden="true" />
+        <div className="vault-ray" aria-hidden="true" />
+        <img className="vault-coin coin-one" src="/art/resource-coin.svg" alt="" />
+        <img className="vault-coin coin-two" src="/art/resource-coin.svg" alt="" />
+        <img className="vault-gem" src="/art/resource-gem.svg" alt="" />
         <img
           className="reward-hero-chest"
           src="/art/treasure-chest.svg"
           alt=""
         />
-        <span>WEEKLY TREASURE</span>
-        <h2>Your next great discovery</h2>
-        <p>Come back every day to upgrade the chest.</p>
-        <div className="timer-pill">Next reward in 03:42:18</div>
+        <span>DAY 4 · RARE TREASURE</span>
+        <h2>Your chest is ready!</h2>
+        <p>Gold, gems, and a mystery boost are waiting.</p>
+        <button className="vault-claim">CLAIM REWARD <b>›</b></button>
+        <div className="timer-pill">Next upgrade · 03:42:18</div>
       </section>
       <div className="section-title">
         <div>
-          <span>EVERY DAY IS A NEW DISCOVERY</span>
+          <span>WEEKLY TRAIL</span>
           <h2>Seven days of treasure</h2>
         </div>
       </div>
@@ -60,9 +66,8 @@ export function RewardsScreen() {
           </div>
         ))}
       </div>
-      <button className="locked-cta">CLAIM DAY 4 REWARD</button>
       <p className="destination-note">
-        Your next treasure is always worth the journey.
+        Claim today to power up tomorrow's chest.
       </p>
     </main>
   )

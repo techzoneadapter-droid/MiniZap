@@ -11,9 +11,11 @@ export function ProfileScreen() {
       <div className="destination-heading">
         <span>LEGENDS START SMALL</span>
         <h1>Hero hall</h1>
-        <p>Your story is just getting started.</p>
+        <p>Your victories, gathered in one place.</p>
       </div>
       <section className="profile-card">
+        <div className="hall-arch" aria-hidden="true" />
+        <div className="hall-glow" aria-hidden="true" />
         <div className="hero-banner banner-left" aria-hidden="true">
           <GameIcon name="star" />
         </div>
@@ -23,6 +25,7 @@ export function ProfileScreen() {
         <div className="avatar premium-avatar">
           <img src="/art/zapling-hero.svg" alt="" />
         </div>
+        <div className="hero-level-medal">12</div>
         <h2>Zap Hero</h2>
         <p>Level 12 · Puzzle Raider</p>
         <div className="rank-chip">
@@ -31,7 +34,7 @@ export function ProfileScreen() {
       </section>
       <div className="section-title">
         <div>
-          <span>A RECORD OF YOUR ADVENTURES</span>
+          <span>YOUR ADVENTURE</span>
           <h2>Glory & milestones</h2>
         </div>
       </div>

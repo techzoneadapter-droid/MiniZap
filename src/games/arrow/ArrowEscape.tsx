@@ -234,12 +234,12 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       <div className="arrow-hills hill-b" aria-hidden="true" />
 
       <header className="arrow-header">
-        <button aria-label="Back to kingdom" className="arrow-back" onClick={onBack}>‹</button>
+        <button aria-label="Back to kingdom" className="arrow-back" onClick={onBack}><span>‹</span></button>
         <div className="arrow-title">
-          <small>CHAPTER {chapter.tier} · {chapter.name.toUpperCase()}</small>
+          <small>{chapter.name.toUpperCase()} · STAGE {chapter.tier}</small>
           <strong>Level {level.number} <em>/ 100</em></strong>
         </div>
-        <div className="arrow-score"><small>SCORE</small><b>{score}</b></div>
+        <div className="arrow-score"><small>SCORE</small><b>{score.toLocaleString()}</b></div>
       </header>
 
       <section className="arrow-status">
@@ -256,7 +256,7 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       <section className="arrow-board-wrap">
         <img className="arena-gem gem-left" src="/art/resource-gem.svg" alt="" />
         <img className="arena-gem gem-right" src="/art/resource-gem.svg" alt="" />
-        <div className="board-banner"><span><img src="/art/arena-arrow.svg" alt="" /> Clear every arrow</span><b>Tap only when the path is open</b></div>
+        <div className="board-banner"><span><img src="/art/arena-arrow.svg" alt="" /> Arrow Arena</span><b>Clear the open paths</b></div>
         <div className="arrow-board-stage">
           <div
             className="arrow-board"
@@ -278,15 +278,15 @@ export function ArrowEscape({ onBack, onEarnCoins }: ArrowEscapeProps) {
       </section>
 
       <section className="arrow-tools">
-        <button onClick={showHint}><span className="tool-orb hint-orb">?</span><div><b>Hint</b><small>Find a safe arrow</small></div></button>
+        <button onClick={showHint}><span className="tool-orb hint-orb">?</span><div><b>Hint</b><small>Safe move</small></div></button>
         <div className={`arrow-tip ${combo >= 3 ? 'hot' : ''}`}><span className="combo-crown"><GameIcon name="star" /></span><b>COMBO</b><strong>{Math.max(1, combo)}×</strong></div>
-        <button onClick={() => resetLevel()}><span className="tool-orb restart-orb"><GameIcon name="restart" /></span><div><b>Restart</b><small>Try a new route</small></div></button>
+        <button onClick={() => resetLevel()}><span className="tool-orb restart-orb"><GameIcon name="restart" /></span><div><b>Restart</b><small>Fresh route</small></div></button>
       </section>
 
       <section className="arrow-treasure">
         <img className={`mini-chest-art ${chestReady ? 'ready' : ''}`} src="/art/treasure-chest.svg" alt="" />
         <div className="treasure-copy">
-          <div><b>{chestReady ? 'Treasure ready!' : 'Treasure trail'}</b><small>{chestReady ? 'Clear this level to finish the set' : `${5 - chestStep} levels until the next chest`}</small></div>
+          <div><b>{chestReady ? 'Treasure ready!' : 'Treasure trail'}</b><small>{chestReady ? 'Win to unlock' : `${5 - chestStep} levels left`}</small></div>
           <div className="treasure-track"><span style={{ width: `${(chestStep / 5) * 100}%` }} /></div>
         </div>
         <div className="treasure-count">{chestStep}/5</div>

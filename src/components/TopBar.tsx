@@ -15,10 +15,10 @@ export function TopBar({ coins, gems, level, xp }: TopBarProps) {
         </div>
         <div className="level-copy">
           <strong>Zap Hero</strong>
-          <small>Puzzle Raider</small>
           <div className="xp-track">
             <span style={{ width: `${xp}%` }} />
           </div>
+          <small>{xp}% to level {level + 1}</small>
         </div>
       </div>
       <div className="currency-row premium-currency-row">
