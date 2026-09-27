@@ -4,7 +4,6 @@ import { GameIcon } from '../components/GameIcon'
 import type { MiniGame } from '../types/game'
 import { playSfx } from '../services/sfx'
 import { chapterFor, levelReward, loadProgress, saveProgress, seededRandom } from './gameUtils'
-import './miniGames.css'
 
 interface Props {
   game: MiniGame
